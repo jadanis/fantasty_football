@@ -16,31 +16,46 @@ data Player
   | Sheri
   deriving (Show,Read,Eq,Ord)
 
-type Record = (Player,Int)
+type Record = (Player,Int,Int)
 
 type Standings = [Record]
 
 type Playoff = (Player,Player,Player,Player)
 
+
+fst' (x,_,_) = x
+
+snd' (_,x,_) = x
+
+trd (_,_,x) = x 
+
 playoff :: Standings -> Playoff
-playoff stds = (fst p1,fst p2,fst p3,fst p4)
+playoff stds = (fst' p1,fst' p2,fst' p3,fst' p4)
   where m1 = playoff' stds
-        p1 = head $ filter ((flip $ (==) . snd) m1) stds
+        p1s = filter ((flip $ (==) . snd') m1) stds
+        s1 = foldl (flip $ max . trd) 0 p1s
+        p1 = head $ filter ((flip $ (==) . trd) s1) p1s
         stds' = filter (/= p1) stds
         m2 = playoff' stds'
-        p2 = head $ filter ((flip $ (==) . snd) m2) stds'
+        p2s = filter ((flip $ (==) . snd') m2) stds'
+        s2 = foldl (flip $ max . trd) 0 p2s
+        p2 = head $ filter ((flip $ (==) . trd) s2) p2s
         stds'' = filter (/= p2) stds'
         m3 = playoff' stds''
-        p3 = head $ filter ((flip $ (==) . snd) m3) stds''
+        p3s = filter ((flip $ (==) . snd') m3) stds''
+        s3 = foldl (flip $ max . trd) 0 p3s
+        p3 = head $ filter ((flip $ (==) . trd) s3) p3s
         stds_3 = filter (/= p3) stds''
         m4 = playoff' stds_3
-        p4 = head $ filter ((flip $ (==) . snd) m4) stds_3
+        p4s = filter ((flip $ (==) . snd') m4) stds_3
+        s4 = foldl (flip $ max . trd) 0 p4s
+        p4 = head $ filter ((flip $ (==) . trd) s4) p4s
 
 playoff' :: Standings -> Int
-playoff' stds = foldl (flip $ max . snd) 0 stds
+playoff' stds = foldl (flip $ max . snd') 0 stds
 
 matchUp :: (Player,Player) -> Prob Record
-matchUp (p1,p2) = makeProb [(p1,1),(p2,1)]
+matchUp (p1,p2) = makeProb [(p1,1,0),(p2,1,0)]
 
 matchUps :: [(Player,Player)] -> Prob [Record]
 matchUps [] = pure []
@@ -51,7 +66,7 @@ updateStanding' rec stds =
   case stds of
     [] -> rec:[]
     s:res ->
-      if (fst rec) == (fst s) then (fst rec, (snd rec) + (snd s)):res else s:(updateStanding' rec res)
+      if (fst' rec) == (fst' s) then (fst' rec, (snd' rec) + (snd' s),(trd s) + (trd rec)):res else s:(updateStanding' rec res)
 
 updateStanding :: [Record] -> Standings -> Standings
 updateStanding recs stds =
@@ -74,11 +89,12 @@ playerIn' :: Player -> Prob Bool
 playerIn' p = joinProb $ fmap (playerIn'' p) playoffs
 
 playerIn :: Player -> String
-playerIn p = (show p) ++ " is in " ++ (show num) ++ " out of " ++ (show den) ++ " times"
+playerIn p = (show p) ++ " is in " ++ (show num) ++ " out of " ++ (show den) ++ " times. (" ++ (show per) ++ "%)"
   where prob = playerIn' p
         rep = filter ((True ==) . fst) $ getProb prob
         num = if length rep > 0 then numerator $ snd $ head rep else 0
         den = if length rep > 0 then denominator $ snd $ head rep else 0
+        per = (fromIntegral num) / (fromIntegral den) * 100
 
 sam = playerIn Sam
 ben = playerIn Ben
@@ -99,16 +115,16 @@ main = do
   sequence_ isIn
 
 week10 =
-  [ (Sam,8)
-  , (Ben,7)
-  , (Pat,6)
-  , (Josh,6)
-  , (Kyle,6)
-  , (John, 4)
-  , (Jake,4)
-  , (Grant,4)
-  , (Sheri, 4)
-  , (Max,1)
+  [ (Sam,8,1164)
+  , (Ben,7,1180)
+  , (Pat,6,1216)
+  , (Josh,6,1153)
+  , (Kyle,6,1057)
+  , (John, 4,1193)
+  , (Jake,4,1177)
+  , (Grant,4,1026)
+  , (Sheri, 4,969)
+  , (Max,1,925)
   ]
 
 week11Matchups = 
