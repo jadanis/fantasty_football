@@ -2,13 +2,13 @@
 Based purely on combinatorics (i.e. 50/50 chance per matchup)
 
 ## As of Game 9
-### Sam 99% (259 933 out of 262 144)
-### Ben 99% (64 647 out of 65 536)
-### Pat 60% (39 511 out of 65 536)
-### Josh 85% (27 847 out of 32 768)
-### Kyle 40% (104 381 out of 262 144)
-### John 9% (24 173 out of 262 144)
-### Jake 0.5% (2569 out of 524 288)
+### Sam 96% (125 599 out of 131 072)
+### Ben 97% (126 499 out of 131 072)
+### Pat 62% (81 693 out of 131 072)
+### Josh 81% (105 569 out of 131 072)
+### Kyle 35% (92 521 381 out of 262 144)
+### John 9% (53 997 out of 262 144)
+### Jake 0.5% (7 883 out of 524 288)
 ### Grant 0.7% (941 out of 131 072)
 ### Sheridan 7% (35 029 524 288)
 ### Max 0%
