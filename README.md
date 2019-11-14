@@ -1,5 +1,5 @@
 # 2019 Fantasy Football Play Offs
-Base purely on combinatorics (i.e. 50/50 chance per matchup)
+Based purely on combinatorics (i.e. 50/50 chance per matchup)
 
 ## As of Game 10
 
