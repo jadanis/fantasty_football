@@ -76,7 +76,7 @@ updateStanding recs stds =
 
 --week11 = joinProb $ updateStanding <$> (matchUps week11Matchups) <*> pure week10
 
-week12 = joinProb $ updateStanding <$> (matchUps week12Matchups) <*> pure week11
+week12 = joinProb $ updateStanding <$> (matchUps week12Matchups) <*> week11
 
 week13 = joinProb $ updateStanding <$> (matchUps week13Matchups) <*> week12
 
@@ -127,19 +127,6 @@ week10 =
   , (Max,1,925)
   ]
 
-week11 =
-  [ (Sam,9,1264)
-  , (Ben,7,1266)
-  , (Pat,6,1330)
-  , (Josh,6,1252)
-  , (Kyle,6,1152)
-  , (John, 5,1283)
-  , (Jake,5,1290)
-  , (Grant,5,1131)
-  , (Sheri, 4,1050)
-  , (Max,2,1069)
-  ]
-
 week11Matchups = 
   [ (Josh,Jake)
   , (Pat,Max)
@@ -147,6 +134,20 @@ week11Matchups =
   , (Grant,Sheri)
   , (Sam,Kyle)
   ]
+
+week11 =
+  pure
+    [ (Sam,9,1264)
+    , (Ben,7,1266)
+    , (Pat,6,1330)
+    , (Josh,6,1252)
+    , (Kyle,6,1152)
+    , (John, 5,1283)
+    , (Jake,5,1290)
+    , (Grant,5,1131)
+    , (Sheri, 4,1050)
+    , (Max,2,1069)
+    ]
 
 week12Matchups =
   [ (Josh,Pat)
