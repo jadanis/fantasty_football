@@ -2,7 +2,16 @@
 Based purely on combinatorics (i.e. 50/50 chance per matchup)
 
 ## As of Game 11
-TBD
+### Sam 100% 
+### Ben 93% (477 out of 512)
+### Pat 75% (385 out of 512)
+### Josh 52% (133 out of 256)
+### Kyle 37% (47 out of 128)
+### John 19% (99 out of 512)
+### Jake 21% (53 out of 256)
+### Grant 3% (15 out of 512)
+### Sheridan 0%
+### Max 0%
 
 ## As of Game 10
 ### Sam 99.9% (4 093 out of 4 096)
