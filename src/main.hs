@@ -74,9 +74,9 @@ updateStanding recs stds =
     [] -> stds
     (r:rs) -> updateStanding rs $ updateStanding' r stds
 
-week11 = joinProb $ updateStanding <$> (matchUps week11Matchups) <*> pure week10
+--week11 = joinProb $ updateStanding <$> (matchUps week11Matchups) <*> pure week10
 
-week12 = joinProb $ updateStanding <$> (matchUps week12Matchups) <*> week11
+week12 = joinProb $ updateStanding <$> (matchUps week12Matchups) <*> pure week11
 
 week13 = joinProb $ updateStanding <$> (matchUps week13Matchups) <*> week12
 
@@ -94,7 +94,7 @@ playerIn p = (show p) ++ " is in " ++ (show num) ++ " out of " ++ (show den) ++ 
         rep = filter ((True ==) . fst) $ getProb prob
         num = if length rep > 0 then numerator $ snd $ head rep else 0
         den = if length rep > 0 then denominator $ snd $ head rep else 0
-        per = (fromIntegral num) / (fromIntegral den) * 100
+        per = if den /= 0 then (fromIntegral num) / (fromIntegral den) * 100 else 0
 
 sam = playerIn Sam
 ben = playerIn Ben
@@ -125,6 +125,19 @@ week10 =
   , (Grant,4,1026)
   , (Sheri, 4,969)
   , (Max,1,925)
+  ]
+
+week11 =
+  [ (Sam,9,1264)
+  , (Ben,7,1266)
+  , (Pat,6,1330)
+  , (Josh,6,1252)
+  , (Kyle,6,1152)
+  , (John, 5,1283)
+  , (Jake,5,1290)
+  , (Grant,5,1131)
+  , (Sheri, 4,1050)
+  , (Max,2,1069)
   ]
 
 week11Matchups = 
