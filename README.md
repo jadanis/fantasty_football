@@ -1,6 +1,18 @@
 # 2019 Fantasy Football Play Offs
 Based purely on combinatorics (i.e. 50/50 chance per matchup)
 
+## As of Game 12
+### Sam 100% 
+### Ben 100%
+### Pat 100% 
+### Josh 25% (1 out of 4)
+### Kyle 0% 
+### John 50% (1 out of 2)
+### Jake 25% (1 out of 4)
+### Grant 0%
+### Sheridan 0%
+### Max 0%
+
 ## As of Game 11
 ### Sam 100% 
 ### Ben 93% (477 out of 512)
