@@ -1,6 +1,7 @@
 import Prob
 import Control.Applicative
 import Data.Ratio
+import Statistics.Distribution.Normal
 
 
 data Player
@@ -22,6 +23,38 @@ type Standings = [Record]
 
 type Playoff = (Player,Player,Player,Player)
 
+type NFLPlayer = [Float]
+
+type LineUp = [NFLPlayer]
+
+type Team = Map Player LineUp
+
+type Match = (Player,Player)
+
+playerStat :: NFLPlayer -> (Float,Float)
+playerStat pl = (u,v)
+  where av ls = (sum ls) / (fromIntegral $ length ls)
+        u = av pl
+        v = (av $ map (^2) pl) - u^2
+
+teamStat :: LineUp -> (Float,Float)
+teamStat ln = (u,v)
+  where sts = map playerstat ln
+        us = [ x | (x,y) <- sts ]
+        vs = [ y | (x,y) <- sts ]
+        u = sum us
+        v = sum vs
+
+matchStat :: Team -> Match -> (Float,Float)
+matchStat t mtch = (u1-u2, v1+v2)
+  where t1 = t ! (fst mtch)
+        t2 = t ! (snd mtch)
+        (u1,v1) = teamStat t1
+        (u2,v2) = teamStat t2
+
+-- Create the Normal Distribution from matchStat
+-- Get probabilities from Distribution
+-- Use this to create weighted Prob of matches 
 
 fst' (x,_,_) = x
 
